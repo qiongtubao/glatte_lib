@@ -41,6 +41,9 @@ func Byte2Json(content []byte) (*JSON, error) {
 func String2Json(content string) (*JSON, error) {
 	return Byte2Json([]byte(content))
 }
+func (j *JSON) SetData(m map[string]interface{}) {
+	j.data = m
+}
 
 func (j *JSON) Map() (map[string]interface{}, error) {
 	if j == nil {
@@ -136,4 +139,26 @@ func (j *JSON) Int() (int, error) {
 	return 0, errors.New("invalid value type")
 }
 
+func (j *JSON) String() (string, error) {
+	if j == nil {
+		return "", errors.New("invalid value type")
+	}
+	b, err := json.Marshal(j.data)
+	if err != nil {
+		return "", err
+	}
+	return string(b), nil
+	/**
+ 	targetValue := reflect.ValueOf(target)
+    switch reflect.TypeOf(target).Kind() {
+		case reflect.Slice, reflect.Array, reflect.:
+			b, err := json.Marshal(m)
+			if err != nil {
+				return "", err
+			}
+			return string(b)
+		break;
 
+	}
+	*/
+}

@@ -1,21 +1,21 @@
 package json
 
 import (
-	"fmt"
+	
 	"testing"
 	"../fs"
 )
 
-func Benchmark_readFile(b *testing.B) {
+func Test_string2Json(t *testing.T) {
 	j, err := String2Json(`{"a":1,"b":"abc"}`)
 	if err != nil {
-		fmt.Println("error:", err)
+		t.Error(err)
 		return
 	}
 	i, err := j.Get("a").Int()
 	if err != nil {
-		fmt.Println("error:", err)
+		t.Error(err)
 		return
 	}
-	fmt.Println("result:", i)
+	t.Log("result:", i)
 }
